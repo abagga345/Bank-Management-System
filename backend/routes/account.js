@@ -45,6 +45,7 @@ accountRouter.post("/transfer",authMiddleware,async function(req,res){
         console.log(err);
         res.status(500).json({"message":"INTERNAL SERVER ERROR"});
     }
+
 })
 
 
