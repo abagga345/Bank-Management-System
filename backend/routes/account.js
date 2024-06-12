@@ -27,12 +27,14 @@ accountRouter.post("/transfer",authMiddleware,async function(req,res){
         let balancecheker=await Account.findOne({"userId":id}).session(session);
         if (balancecheker["balance"]<amount){
         await  session.abortTransaction();
-        res.status(400).json({"message":"INSUFFICIENT BALANCE"});
+            res.status(400).json({"message":"INSUFFICIENT BALANCE"});
+            return;
         }
         let toid=await User.findOne({"_id":to}).session(session);
         if (toid==null){
-        await session.abortTransaction();
-        res.status(400).json({"message":"INVALID ACCOUNT"});
+            await session.abortTransaction();
+            res.status(400).json({"message":"INVALID ACCOUNT"});
+            return;
         }
         await Account.updateOne({"userId":id},{$inc:{"balance":-amount}}).session(session);
         await Account.updateOne({"userId":toid},{$inc:{"balance":amount}}).session(session);
