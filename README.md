@@ -1,4 +1,6 @@
+### BANK MANAGEMENT SYSTEM
 
+A fully fledged jwt authenticated  bank managing website where users can register by providing some of their details and they can create an account, take a loan make transactions and make loan repayments.
 
 ### Technologies used are:-
 * Express js
